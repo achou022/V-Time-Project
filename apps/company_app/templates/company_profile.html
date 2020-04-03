@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}
+&circlearrowright; V-Time | {{company.name}} | Profile
+{% endblock title %}
+{% block body %}
+<div class="justify-content-center">
+    <div class="card">
+        <div class="card-header" style="background-color: #009ac7; color: #e5f3f9;">
+            Company Profile
+        </div>
+        <div class="card-body">
+        
+            <div class="media">
+                <img class="mr-3" src="https://picsum.photos/seed/{{company.name}}/300" alt="Generic placeholder image">
+                <div class="media-body">
+                    <h5 class="card-title">{{company.name}}</h5>
+                    <p class="card-text">{%lorem%}</p>
+                </div>
+            </div>
+        
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                {%for event in company.events_owned.all%}
+                <h5 class="card-title"><a href="{%url 'event:dashboard' event_id=event.id%}">{{event.name}}</a></h5>
+                <hr>
+                {%endfor%}
+            </li>
+            <li class="list-group-item">Category: {{company.category.category}}</li>
+            <li class="list-group-item">Admin: 
+                {%for admin in company.admins.all%}
+                <a href="{%url 'login:profile' userID=admin.id%}">{{admin.first_name}} {{admin.last_name}}</a>
+                {%endfor%}
+            </li>
+            <li class="list-group-item">Email: {{company.email}}</li>
+            <li class="list-group-item">Website: <a href={{company.website}}>{{company.website}}</a></li>
+            <li class="list-group-item">Location: {{company.address}}</li>
+            <li class="list-group-item">Registered: {{company.created_at}}</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

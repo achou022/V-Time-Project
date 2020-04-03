@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% block title %}
+&circlearrowright; V-Time | Events
+{% endblock title %}
+{% block body %}
+{%load static%}
+<link rel="stylesheet" href="{%static 'style.css'%}">
+<div class="justify-content-center">
+    <div class="card">
+        <div class="card-header" style="background-color: #009ac7; color: #e5f3f9;">
+            <input class="rounded-pill text-center p-1" style="font-size: smaller;" type="text" name="search" id="search" placeholder="Search Events!">
+            <span class="text-right float-right">
+                <a href="" data-toggle="modal" data-target="#create-event" style="color: #e5f3f9;">Create Event</a>
+            </span>
+        </div>
+        <div class="card-body bg-dark">
+            <div class="card-columns">
+                <div id="events">
+                    {% for event in events %}
+                        <div class="card" >
+                            <div class="card-body">
+                                {%load static%}
+                                <a href="{% url 'event:dashboard' event_id=event.id %}">
+                                    <img class="card-img-top" src="https://picsum.photos/seed/{{event.name}}/300" alt="Card image cap">
+                                </a>
+                                <hr>
+                                <h5 class="card-title text-capitalize"  style="text-align: center;"><a href="{% url 'event:dashboard' event_id=event.id %}">{{event.name}}</a></h5>
+                                <div class="card-text">
+                                    {% if user in event.owner.admins.all %}
+                                    <a href="{% url 'event:editMenu' event_id=event.id %}">Edit me</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- create event modal -->
+        <div class="modal fade" id="create-event" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- <div class="card" style="width: 60rem; height: 40rem;">{{graph|safe}}</div> -->
+                <div class="modal-content">
+                <div class="modal-header" style="background-color: #009ac7; color: #e5f3f9;">
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                    <h4 class="modal-title">Hello, {{user.first_name}}! Please register your event!!!</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{%url 'event:register'%}" method="POST">
+                        {%csrf_token%}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Whoops!</strong> {{message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="owner">Event Owner</label>
+                            <select name="owner" class="form-control">
+                                {%for company in user.company_admin.all%}
+                                <option value="{{company.id}}">{{company.name}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Event Name</label>
+                            <input type="text" class="form-control" name="name" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Event Associated Email</label>
+                            <input type="email" class="form-control" name="email" id="email" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone_number">Phone Number</label>
+                            <input type="text" class="form-control" name="phone_number" id="phone_number" value='9491234567'>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Event Scheduled Time</label>
+                            <input type="datetime-local" class="form-control" name="time" value='2020-09-29' id="time">
+                        </div>
+                        <div class="form-group">
+                            <label for="website">Event Website</label>
+                            <input type="text" class="form-control" name="website" value='' id="website">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Event Location</label>
+                            <input type="text" class="form-control" name="address" value='' id="address">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Event About</label>
+                            <textarea type="date" class="form-control" name="description" value='' id="description"></textarea>
+                        </div>
+                    
+                        <div class="" id="job_selection">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Required Jobs</label>
+                            <select class="form-control" id="select_required_job">
+                                <option class="option" value=0  selected>Select a Job Type</option>
+                                {% for job in jobs %}
+                                <option class= "option" value={{job.id}}>{{job.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </form>
+                </div>
+                <div class="modal-footer" style="background-color: #009ac7; color: #e5f3f9;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="color: #e5f3f9;">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+    $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#events div").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+            var added_jobs={};
+            $('#select_required_job').change(function(){ //when user selects a different job
+                console.log('-------------------activating change function---------------')
+                var job_id = $(this).val();
+                var job_text = $("#select_required_job option:selected").text();
+                
+                
+                if (added_jobs[job_id]!==undefined){
+                    console.log("if check passed")
+                    console.log('job already added')
+                } else{
+                    console.log("begin else statement")
+                    added_jobs[job_id]=job_text
+                    console.log("added id "+job_id+" to dictionary "+added_jobs+", value: "+added_jobs[job_id]) // adding to added_jobs array
+                    console.log("selected job text: "+job_text);
+                    $('#job_selection').append(
+                        '<div class="input-group mb-3" id="close_'+job_id+'">'+
+                            '<div class="input-group-prepend">'+
+                                '<div class="input-group-text">'+
+                                    '<button type="button" class="close" super_id="close_'+job_id+'" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                                '</div>'+
+                            '</div>'+
+                            '<fieldset disabled><input type="text" class="form-control" name="jobType_'+job_id+'" placeholder="'+job_text+'" aria-label="job type" aria-describedby="job type"></fieldset>'+
+                            '<div class="input-group-append">'+
+                                '<input type="number" class="form-control" placeholder="0" name="amount_'+job_id+'" id="number" aria-describedby="">'+
+                            '</div>'+
+                        '</div>'
+                    );
+                    console.log("removing option: "+$(".option[value="+job_id+"]").val()+" from option selector")//removing option
+                    $(".option[value="+job_id+"]").remove()
+                }
+            })
+            $(document).on('click', '.close', function(){
+                console.log("||||||||||||||activating click function||||||||||||||||")
+                var job_id = $(this).attr("super_id").slice(6);
+                console.log("job id: "+job_id)
+                var job = added_jobs[job_id];
+                console.log(job)
+                current_id=$(this).attr('super_id');
+                console.log("removing: "+current_id);
+                $("#"+current_id).remove();
+                
+                console.log("new spliced array: "+added_jobs); //removing from added_jobs array
+                console.log("adding option:"+job+" to option selector"); // adding option
+                $("#select_required_job").append(
+                    `<option class= "option" value="${job_id}">${job}</option>`
+                )
+                delete added_jobs[job_id];
+            })
+            
+        })
+</script>
+{% endblock %}

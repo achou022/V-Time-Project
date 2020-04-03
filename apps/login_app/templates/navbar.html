@@ -1,0 +1,41 @@
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="color: #009ac7;">
+        <a class="navbar-brand" href="/" style="color: #009ac7;">V-Time</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" style="color: #009ac7;">
+                {%if request.session.user%}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login:dashboard' %}" style="color: #009ac7;">Home <span class="sr-only">(current)</span></a>
+                </li>
+                {%endif%}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'company:splash' %}" style="color: #009ac7;">Companies <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'event:splash' %}" style="color: #009ac7;">Events <span class="sr-only">(current)</span></a>
+                </li>
+                <!-- {% if request.session.user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login:editMenu' %}">Edit Account</a>
+                </li>
+                {% endif %}  -->
+            </ul>
+            
+            <span>
+                {% if username%}
+                Hello, {{username.alias}} {{username.first_name}} | <a href='/logout' style="color: aliceblue;">Logout</a>
+                {% else %}
+                NOT LOGGED IN  | <a href='/login/menu' style="color: ;">Login</a>
+                {% endif %} 
+            </span> 
+            
+        </div>
+    </nav>
+    <script>
+        $(function(){
+            console.log(window.location.pathname)
+            $('a[href*="'+window.location.pathname+'"]').addClass('active')
+        })
+    </script>

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}
+&circlearrowright; V-Time | {{user.first_name}} {{user.last_name}} | Admin
+{% endblock title %}
+{% block body %}
+<div class="justify-content-center">
+    <div class="card">
+        <div class="card-header" style="background-color: #009ac7; color: #e5f3f9;">
+            Hello, {{user.first_name}}!
+            <span class="text-right float-right">
+                <a href="{% url 'login:dashboard' %}" style="color: #e5f3f9;">Back</a>
+            </span>
+        </div>
+        <div class="card-body bg-dark">
+            {%load static%}
+            <div class="card-columns">
+                {%for company in user.company_admin.all%}
+                <div class="card">
+                    <img class="card-img-top" src="{%static 'companyLogo.jpg'%}" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{company.name}}</h5>
+                    <p class="card-text">About: {{company.description}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Admin: 
+                            {%for admin in company.admins.all%} 
+                                <a href="{%url 'login:profile' userID=admin.id%}">{{admin.first_name}} {{admin.last_name}}</a>
+                            {%endfor%}
+                        </li>
+                        <li class="list-group-item">Email: {{company.email}}</li>
+                        <li class="list-group-item">Website: {{company.website}}</li>
+                        {%if company.events_owned.all%}
+                        <li class="list-group-item">
+                            Owner of Events
+                            <hr>
+                            {%for event in company.events_owned.all%}
+                            <a href="{% url 'event:editMenu' event_id=event.id %}">{{event.name}} | </a>
+                            {%endfor%}
+                        </li>
+                        {%endif%}
+                        {% if company.events_contributed.all%}
+                        <li class="list-group-item">
+                            Contributor of Events
+                            <hr>
+                            {%for event in company.events_contributed.all%}
+                            <a href="">{{event.name}}</a>
+                            {%endfor%}
+                        </li>
+                        {%endif%}
+                        {% if company.events_sponsored.all%}
+                        <li class="list-group-item">
+                            Sponsor of Events
+                            <hr>
+                            {%for event in company.events_sponsored.all%}
+                            <a href="">{{event.name}}</a>
+                            {%endfor%}
+                        </li>
+                        {%endif%}
+                    </ul>
+                    <div class="card-footer">
+                        <a href="{%url 'company:editMenu' company_id=company.id%}">Edit Company</a>
+                        <a href="{%url 'event:register_menu'%}" style="float: right;">Create Event</a>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div> 
+</div>
+{% endblock %}

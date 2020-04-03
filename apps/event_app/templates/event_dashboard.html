@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% block title %}
+&circlearrowright; V-Time | {{event.name}} | Info
+{% endblock title %}
+{% block body %}
+{%load static%}
+<link rel="stylesheet" href="{%static 'style.css'%}">
+<div class="justify-content-center">
+    <div class="card">
+        <div class="card-header text-capitalize" style="background-color: #009ac7; color: #e5f3f9;">
+            {{event.name}}
+            {%if request.session.user %}
+            <a class="float-right" href="" data-toggle="modal" data-target="#job-selection-form" style="color: #e5f3f9;">Join</a>
+            {%else%}
+            <a class="float-right" href="{%url 'login:register'%}">Signup Now!</a>
+            {%endif%}
+        </div>
+        <div class="card-body">
+            <div class="media">
+                <img class="mr-3" src="https://picsum.photos/seed/{{event.name}}/300" alt="Generic placeholder image">
+                <div class="media-body">
+                    <h5 class="card-title"><span style="font-size: small; font-style: italic;">Hosted By:</span> <a href="{%url 'company:profile' companyID=event.owner.id%}">{{event.owner.name}}</a></h5>
+                    <p class="card-text">{{event.description}} {%lorem%}</p>
+                </div>
+            </div>
+        
+        
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Time: {{event.time}}</li>
+            <li class="list-group-item">Location: {{event.address}}</li>
+            <li class="list-group-item">Contact: {{event.email}}</li>
+            <li class="list-group-item">Partnering Companies:
+                {%if event.contributors.all%}
+                    {%for company in event.contributors.all%}
+                        <a href="{%url 'company:profile' companyID=company.id%}">{{company.name}}</a>
+                    {%endfor%}
+                {%else%}
+                    None
+                {%endif%}
+            </li>
+            <li class="list-group-item">Sponsor Companies:
+                {%if event.sponsors.all%}
+                    {%for company in event.sponsors.all%}
+                    <a href="{%url 'company:profile' companyID=company.id%}">{{company.name}}</a>
+                    {%endfor%}
+                {%else%}
+                    None
+                {%endif%}
+            </li>
+            <li class="list-group-item">
+                {%if event.job_event.all%}
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" href="">Please volunteer for {{event.name}}!</a>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                            Description of the role and Availability are listed below. Explore the wide range of volunteer work available on V-time and contribute to your local community and events by 
+                            volunteering at one of our events! We hope to bring the community closer with these events and help those in need in our local community. Get recognize for your ability and 
+                            work with endorsements and more!
+                            </div>
+                        </div>
+                    </div>
+                    {%for job in event.job_event.all%}
+                    <div class="card">
+                        <div class="card-header">
+                            {% for company in user.company_admin.all %} <!--reuse the logic from before instead of having it display twice-->
+                            {% if company == event.owner %} <!--also, in a for loop so there is a chance the if statement could proc more than once-->
+                                <form action="{% url 'event:delete_job' eventID=event.id jobID=job.id%}" method="POST">
+                                    {%csrf_token%}
+                                    <button type="submit" class="close float-left mr-2">&times;</button>
+                                </form>
+                            {% endif %}
+                            {% endfor %}
+                            <a data-toggle="collapse" data-target="#job_{{job.id}}" aria-expanded="false" aria-controls="job_{{job.id}}" href="">{{job.jobType.name}}</a>
+                            
+                            <span class="badge float-right {% if job.user.all|length < 1 %} btn-success {% elif job.user.all|length < job.required_amount %}btn-warning{% else %}btn-danger{% endif %}">{{job.user.all|length}}/{{job.required_amount}}</span>
+                        </div>
+                        <div id="job_{{job.id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                {{job.jobType.description}} 
+                                <br>{%lorem%}
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </div>
+                {%else%}
+                None yet
+                {%endif%}
+            </li>
+            {%if request.session.user%}
+            <li class="list-group-item">
+                <p class="card-text">
+                    <form action="{%url 'event:newPost' eventID=event.id%}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="message">Ask <a href="{%url 'company:profile' companyID=event.owner.id%}">{{event.owner.name}}</a> questions or share your thoughts on the event!!!</label>
+                            <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+                            <button class="btn btn-primary" type="submit">Post</button>
+                        </div>
+                    </form>
+                </p>
+            </li>
+            {%endif%}
+            {%if event.postsByTime%}
+            <li class="list-group-item">
+                <h5 class="card-title">Posts:</h5>
+                <!-- accordion posts -->
+                <div class="accordion" id='posts'>
+                    {%for post in event.postsByTime%}
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><a data-toggle="collapse" data-target="#post_{{post.id}}" aria-expanded="true" aria-controls="collapseOne" href="">{{post.message}}</a> <span style="font-size: small;">by <a href="{%url 'login:profile' userID=post.user.id%}">{{post.user.first_name}}</a></span></h5>
+                        </div>
+                        <div id="post_{{post.id}}" class="collapse card-body" aria-labelledby="headingOne" data-parent="#posts">
+                            {%for comment in post.commentsByTime%}
+                            <div class="card-text border-bottom">
+                                <p><a href="{%url 'login:profile' userID=comment.user.id%}">{{comment.user.first_name}}</a>: {{comment.comment}}</p>
+                                <span style="font-size: smaller; font-style: italic; float: right;">{{comment.created_at}}</span>
+                                <br>
+                            </div>
+                            {%endfor%}
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <form action="{%url 'event:newComment' postID=post.id%}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="comment">Leave a comment!</label>
+                                            <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                                            <button class="btn btn-primary" type="submit">Comment</button>
+                                        </div>
+                                    </form>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </div>
+                <!-- end of accordion -->
+            </li>
+            {%endif%}
+        </ul>
+    </div>
+    <!-- job selection modal -->
+    <div class="modal fade" id="job-selection-form" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- <div class="card" style="width: 60rem; height: 40rem;">{{graph|safe}}</div> -->
+            <div class="modal-content">
+            <div class="modal-header" style="background-color: #009ac7; color: #e5f3f9;">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <h4 class="modal-title text-center">Welcome, {{user.first_name}}! Please select a role! </h4>
+            </div>
+            <div class="modal-body">
+                <form action="{%url 'event:jobSignUp' eventID=event.id%}" method="POST">
+                    {%csrf_token%}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Whoops!</strong> {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Available Roles</label>
+                        <select class="form-control" name="jobID" id="select_required_job">
+                            <option class="option" selected>Select a Job</option>
+                            {% for job in event.job_event.all %}
+                            {%if job.user.all|length < job.required_amount%}
+                            <option class= "option" value={{job.id}}>{{job.jobType.name}} || Positions filled: {{job.user.all|length}} / {{job.required_amount}}</option>
+                            {%endif%}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Confirm</button>
+                </form>
+            </div>
+            <div class="modal-footer" style="background-color: #009ac7; color: #e5f3f9;">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="color: #e5f3f9;">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

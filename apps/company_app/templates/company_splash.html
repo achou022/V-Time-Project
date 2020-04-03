@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}
+&circlearrowright; V-Time Platform | Companies
+{% endblock title %}
+{% block body %}
+<div class="justify-content-center">
+    <div class="card">
+        <div class="card-header" style="background-color: #009ac7; color: #e5f3f9;">
+            <input class="rounded-pill text-center p-1" style="font-size: smaller;" type="text" name="search" id="search" placeholder="Search Companies!">
+            <span class="text-right float-right">
+                <a href="" data-toggle="modal" data-target="#register-company" style="color: #e5f3f9;">Register Company</a>
+            </span>
+        </div>
+        <div class="card-body bg-dark">
+            <div class="card-columns">
+                <div  id='companies'>
+                {% for company in companies %}
+                        <div class="card" >
+                            <div class="card-body">
+                                {%load static%}
+                                <a href="{%url 'company:profile' companyID=company.id%}"><img class="card-img-top" src="https://picsum.photos/seed/{{company.name}}/300"  alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title" style="text-align: center;"><a href="{%url 'company:profile' companyID=company.id%}">{{company.name}}</a></h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Category: {{company.category.category}}</h6>
+                                <div class="card-text">
+                                    {% if user in company.admins.all %}
+                                    <a href="{% url 'company:editMenu' company_id=company.id %}">Edit me</a>
+                                    {% endif %}
+                                    {% if user.level == 9 %}
+                                    <a href="{% url 'company:editMenu' company_id=company.id %}">Admin Edit</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!-- register company modal -->
+    <div class="modal fade" id="register-company" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- <div class="card" style="width: 60rem; height: 40rem;">{{graph|safe}}</div> -->
+            <div class="modal-content">
+            <div class="modal-header"  style="background-color: #009ac7; color: #e5f3f9;">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <h4 class="modal-title">Hi, {{user.first_name}}! Register your company!</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'company:register' %}" method="POST">
+                    {%csrf_token%}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Whoops!</strong> {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="name">Company Name</label>
+                        <input type="text" class="form-control" name="name" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description (>150char)</label>
+                        <input type="text" class="form-control" name="description" id="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Contact Email address</label>
+                        <input type="email" class="form-control" name="email" id="email" value="@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" name="address" id="address" value="123 my street">
+                    </div>
+                    <div class="form-group">
+                        <label for="website">Website</label>
+                        <input type="text" class="form-control" name="website" id="website" value="testSite.com">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">Register</button>
+                </form>
+            </div>
+            <div class="modal-footer"  style="background-color: #009ac7; color: #e5f3f9;">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="color: #e5f3f9;">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+    $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#companies div").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    });
+</script>
+{% endblock %}

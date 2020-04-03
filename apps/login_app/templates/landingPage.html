@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+&circlearrowright; V-Time
+{% endblock title %}
+{% block body %}
+<div class="jumbotron" style="color: aliceblue; background-size: cover; background-image: url(https://static.ebayinc.com/static/assets/Uploads/Stories/Articles/Untitled-1.jpg);">
+    <h1 class="display-4">V-time Project!</h1>
+    <p class="lead">Track your volunteer hours with V-time!</p>
+    <hr class="my-4">
+    <p style="text-shadow:
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;">
+     A volunteer platform where companies and communities can devote resources for the greater good!</p>
+    <a class="btn btn-primary btn-lg" href="/register/menu" role="button">Learn more</a>
+    <p>
+      {% if username %}
+        Hello,{{username.first_name}} register a company please| 
+        <a href="{% url 'company:registerMenu' %}">Register</a>
+      {% endif %} 
+    </p> 
+  </div>
+  {% if graph %}
+<div style="width:600;height:500">
+{{ graph|safe }}
+</div>
+{% endif %}
+{% endblock body %}

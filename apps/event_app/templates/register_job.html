@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}
+Event Signup
+{% endblock title %}
+{% block body %}
+<div class="d-flex justify-content-center">
+    <div class="card-group">
+        <div class="card" style="width: 35rem;">
+            <div class="card-header text-center">
+                {{event.name}}
+            </div>
+            <div class="card-body">
+                <form action="{%url 'event:jobSignUp' eventID=event.id%}" method="POST">
+                    {%csrf_token%}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Whoops!</strong> {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Available Roles</label>
+                        <select class="form-control" name="jobID" id="select_required_job">
+                            <option class="option" selected>Select a Job</option>
+                            {% for job in event.job_event.all %}
+                            <option class= "option" value={{job.id}}>{{job.jobType.name}} || Positions filled: {{job.user.all|length}} / {{job.required_amount}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Confirm</button>
+                </form>
+            </div>
+        </div> 
+    </div>
+</div>
+{% endblock%}

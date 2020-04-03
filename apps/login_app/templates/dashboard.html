@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+{% block title %}
+&circlearrowright;V-Time | {{user.first_name}} {{user.last_name}} | Home
+{% endblock title %}
+{% block body %}
+
+<div class="justify-content-center">
+    <div class="card">
+        <div class="card-header border-0" style="background-color: #009ac7; color: #e5f3f9;">
+            Hello, {{user.first_name}}!
+            <span class="text-right float-right">
+                <a data-toggle="modal" data-target="#editProfile" href="" style="color: #e5f3f9;">Edit Profile</a>
+            </span>
+        </div>
+        <div class="card-body bg-dark border-0">
+            {%load static%}
+            <div class="card-deck">
+                <div class="card mb-2" style="width: 20rem;">
+                    <img class="card-img-top" src="{%static 'profilePic.png'%}" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{user.alias}}</h5>
+                    <p class="card-text">About: {{user.description}} {%lorem%}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{user.first_name}} {{user.last_name}}</li>
+                        <li class="list-group-item">Birthday: {{user.birthday}}</li>
+                        <li class="list-group-item">Email: {{user.email}}</li>
+                        <li class="list-group-item">Contact: {{user.phone_number}}</li>
+                    </ul>
+                    {%if user.company_admin.all%}
+                        <div class="card-body">
+                            <span>Admin Service</span>
+                            <br>
+                            <a href="{%url 'login:admin_dashboard' adminID=user.id%}" class="card-link" style="font-size: small;">Manage Company & Events</a>
+                        </div>
+                    {%endif%}
+                </div>
+                <div class="card mb-2 bg-dark" style="width: 20rem; border: none;">
+                    <div class="card-rows">
+                        <div class="card mb-2 border-0">
+                            <div class="card-header text-center border-0"  style="background-color: #009ac7; color: #e5f3f9;">Upcoming Events <span class="badge badge-success float-right my-auto">{{user.allFutureEvents | length}}</span></div>
+                            <div class="card-body" id="upcomingE">
+                                <div  class="overflow-auto" style="height: 230px;">
+                                    <ul class="list-group">
+                                        {%if user.upcomingEvents%}
+                                            {%for event in user.upcomingEvents%}
+                                            <li class="list-group-item border-0 p-0"><a href="{%url 'event:dashboard' event_id=event.event.id%}">{{event.event.name}}</a>
+                                            <br>
+                                            <span style="font-size: x-small; font-style: italic; color: coral;">Scheduled: {{event.event.time}}</span>
+                                            </li>
+                                            {%endfor%}
+                                        {%else%}
+                                            No Events yet
+                                        {%endif%}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer p-0" style="background-color: #009ac7; color: #e5f3f9;">
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="card mb-2 border-0">
+                            <div class="card-header text-center" style="background-color: #009ac7; color: #e5f3f9;">Past Events <span class="badge badge-warning float-right my-auto">{{user.allPastEvents | length}}</span></div>
+                            <div class="card-body">
+                                <div  class="overflow-auto" style="height: 230px;">
+                                    <ul class="list-group">
+                                        {%if user.allPastEvents%}
+                                                {%for event in user.allPastEvents%}
+                                                <li class="list-group-item border-0 p-0 mb-3"><a href="{%url 'event:dashboard' event_id=event.event.id%}">{{event.event.name}}</a></li>
+                                                {%endfor%}
+                                            {%else%}
+                                                No Events yet
+                                        {%endif%}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer p-0" style="background-color: #009ac7; color: #e5f3f9;">
+                                <p></p>
+                            </div>
+                        </div>
+                        {% if user.level == 9 %}
+                        <div class="card mb-2 border-0">
+                            <div class="card-header text-center">Users <span class="badge badge-primary float-right my-auto">{{all_users | length}}</span></div>
+                            <div class="card-body">
+                                <div class="overflow-auto" style="height: 300px;">
+                                    <ul class="list-group" style="color: green;">
+                                        {%for user in all_users%}
+                                                    <li class="list-group-item border-0 p-0"><a href="{%url 'login:profile' userID=user.id%}">{{user.first_name}} - {{user.vTime}}hrs</a></li>
+                                        {%endfor%}
+                                            
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer p-0" style="text-align: center;">
+                                <p></p>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card mb-2 bg-dark" style="width: 20rem; border: none;">
+                    <div class="card-rows">
+                        <div class="card mb-2 border-0">
+                            <div class="card-header text-center" style="background-color: #009ac7; color: #e5f3f9;">{{user.first_name}} {{user.last_name}} V-Stats</div>
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    <!-- <li class="list-group-item border-0 p-0">User Ranking: {{user.ranking}}</li> -->
+                                    <li class="list-group-item border-0 p-0">Power User: <a href="{%url 'login:profile' userID=user.powerUser.id%}">{{user.powerUser.first_name}}</a></li>
+                                    <li class="list-group-item border-0 p-0">Total V-Time: {{user.vTime}} Hrs</li>
+                                    <li class="list-group-item border-0 p-0">Total Events: {{user.jobs.all | length}}</li>
+                                    <li class="list-group-item border-0 p-0">Avg V-Time/Event: {{user.avgVTime}} Hrs</li>
+                                    <!-- <li class="list-group-item border-0 p-0">Endorsements: "placeholder"</li> -->
+                                </ul>
+                            </div>
+                            <div class="card-footer p-0" style="text-align: center;background-color: #009ac7; color: #e5f3f9;">
+                                <a href="" data-toggle="modal" data-target="#myModal" style="font-size:small; color: #e5f3f9;">View Performance</a>
+                            </div>
+                        </div>
+                        <div class="card mb-2 border-0">
+                            <div class="card-header text-center" style="background-color: #009ac7; color: #e5f3f9;">Recent Posts <span class="badge badge-success float-right my-auto">{{user.user_post.all | length}}</span></div>
+                            <div class="card-body">
+                                <div class="overflow-auto" style="height: 300px;">
+                                    <ul class="list-group overflow-auto" style="height: 300px;">
+                                        {%for post in user.user_post.all%}
+                                        <li class="list-group-item border-0 p-0"><a href="{%url 'event:dashboard' event_id=post.event.id%}">{{post.message}}</a> 
+                                            <br><span style="font-size: x-small; font-style: italic;">{{post.event.created_at}}</span></li>
+                                        {%endfor%}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer p-0" style="background-color: #009ac7; color: #e5f3f9;">
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="card mb-2 border-0">
+                            <div class="card-header text-center" style="background-color: #009ac7; color: #e5f3f9;">Recent Comments <span class="badge badge-success float-right my-auto">{{user.user_comment.all | length}}</span></div>
+                            <div class="card-body">
+                                <div class="overflow-auto" style="height: 300px;">
+                                    <ul class="list-group">
+                                        {%for comment in user.user_comment.all%}
+                                        <li class="list-group-item border-0 p-0"><a href="">{{comment.comment}}</a> <br><span style="font-size: x-small; font-style: italic;">{{comment.post.event.created_at}}</span></li>
+                                        {%endfor%}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer p-0" style="background-color: #009ac7; color: #e5f3f9;">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!-- user performance state modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- <div class="card" style="width: 60rem; height: 40rem;">{{graph|safe}}</div> -->
+            <div class="modal-content">
+            <div class="modal-header" style="background-color: #009ac7; color: #e5f3f9;">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <h4 class="modal-title">{{user.first_name}} {{user.last_name}}'s Performance Stats</h4>
+            </div>
+            <div class="modal-body">
+                <div >{{graph|safe}}</div>
+            </div>
+            <div class="modal-footer" style="background-color: #009ac7; color: #e5f3f9;">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="color: #e5f3f9;">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit User Profile Modal -->
+    <div class="modal fade" id="editProfile" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- <div class="card" style="width: 60rem; height: 40rem;">{{graph|safe}}</div> -->
+            <div class="modal-content">
+            <div class="modal-header" style="background-color: #009ac7; color: #e5f3f9;">
+                <h5>Edit User</h5>
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            </div>
+            <div class="modal-body">
+                <form action= "{% url 'login:edit' %}" method="POST">
+                    {%csrf_token%}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Whoops!</strong> {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" name="email" id="email" value={{user.email}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" name="first_name" id="first_name" value={{user.first_name}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" id="last_name" value={{user.last_name}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="alias">Alias</label>
+                        <input type="text" class="form-control" name="alias" id="alias" value={{user.alias}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthday">Birthday</label>
+                        <input type="date" class="form-control" name="birthday" value='2001-09-29' id="birthday" value={{user.birthday}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <input type="text" class="form-control" name="phone_number" id="phone_number" value={{user.phone_number}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">About</label>
+                        <textarea type="text" class="form-control" name="description" id="description">{{user.description}}</textarea>
+                    </div>
+                    <input class="form-control" type="text" placeholder="level: {{user.level}}" readonly>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" value="1" id="adminlevel" name="adminlevel">
+                        <label class="form-check-label" for="adminlevel">Check for super admin powers</label>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </form>
+            </div>
+            <div class="modal-footer" style="background-color: #009ac7; color: #e5f3f9;">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="color: #e5f3f9;">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

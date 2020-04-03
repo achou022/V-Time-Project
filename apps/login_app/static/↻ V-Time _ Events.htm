@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://localhost:8000/event/splash -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+↻ V-Time | Events
+</title>
+    <link rel="stylesheet" href="./↻ V-Time _ Events_files/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="./↻ V-Time _ Events_files/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="./↻ V-Time _ Events_files/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="./↻ V-Time _ Events_files/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./↻ V-Time _ Events_files/jquery.min.js"></script>
+    <script src="./↻ V-Time _ Events_files/bootstrap.min(1).js"></script>
+    <script>
+        $(function(){
+                $.get("/getNavBar",function(data){
+                    $("#navBar").append(data);
+                });    
+        })
+    </script>
+    
+    
+</head>
+<body class="" style="padding-right: 30px;">
+    <div class="container">
+        <div class="header">
+             <div id="navBar">    <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="color: #009ac7;">
+        <a class="navbar-brand" href="http://localhost:8000/" style="color: #009ac7;">V-Time</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" style="color: #009ac7;">
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8000/dashboard" style="color: #009ac7;">Home <span class="sr-only">(current)</span></a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8000/company/splash" style="color: #009ac7;">Companies <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="http://localhost:8000/event/splash" style="color: #009ac7;">Events <span class="sr-only">(current)</span></a>
+                </li>
+                <!-- 
+                <li class="nav-item">
+                    <a class="nav-link" href="/edit/menu">Edit Account</a>
+                </li>
+                  -->
+            </ul>
+            
+            <span>
+                
+                Hello, MacMasterRace Steve | <a href="http://localhost:8000/logout" style="color: aliceblue;">Logout</a>
+                 
+            </span> 
+            
+        </div>
+    </nav>
+    <script>
+        $(function(){
+            console.log(window.location.pathname)
+            $('a[href*="'+window.location.pathname+'"]').addClass('active')
+        })
+    </script></div> 
+            
+            
+        </div>
+        <div class="body">
+            
+
+<link rel="stylesheet" href="./↻ V-Time _ Events_files/style.css">
+<div class="justify-content-center">
+    <div class="card">
+        <div class="card-header" style="background-color: #009ac7; color: #e5f3f9;">
+            <input class="rounded-pill text-center p-1" style="font-size: smaller;" type="text" name="search" id="search" placeholder="Search Events!">
+            <span class="text-right float-right">
+                <a href="http://localhost:8000/event/splash" data-toggle="modal" data-target="#create-event" style="color: #e5f3f9;">Create Event</a>
+            </span>
+        </div>
+        <div class="card-body bg-dark">
+            <div class="card-columns">
+                <div id="events">
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/1"><img class="card-img-top" src="./↻ V-Time _ Events_files/978-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/1">CHUNG's picknick</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/2"><img class="card-img-top" src="./↻ V-Time _ Events_files/38-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/2">GILBERT's run</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/3"><img class="card-img-top" src="./↻ V-Time _ Events_files/646-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/3">WHITE's soup kitchen</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/4"><img class="card-img-top" src="./↻ V-Time _ Events_files/158-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/4">RANDOLPH's run</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/5"><img class="card-img-top" src="./↻ V-Time _ Events_files/807-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/5">DUNLAP's bowling night</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/6"><img class="card-img-top" src="./↻ V-Time _ Events_files/1000-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/6">YORK's soup kitchen</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/7"><img class="card-img-top" src="./↻ V-Time _ Events_files/795-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/7">CALDERON's picknick</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/8"><img class="card-img-top" src="./↻ V-Time _ Events_files/362-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/8">ADAMS's bowling night</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/9"><img class="card-img-top" src="./↻ V-Time _ Events_files/114-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/9">ESCOBAR's bowling night</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/10"><img class="card-img-top" src="./↻ V-Time _ Events_files/969-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/10">GILBERT's soup kitchen</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/11"><img class="card-img-top" src="./↻ V-Time _ Events_files/30-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/11">MERCADO's walk</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/12"><img class="card-img-top" src="./↻ V-Time _ Events_files/732-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/12">CARTER's picknick</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/13"><img class="card-img-top" src="./↻ V-Time _ Events_files/594-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/13">HOWELL's picknick</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/14"><img class="card-img-top" src="./↻ V-Time _ Events_files/606-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/14">HAYNES's pizza party</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/15"><img class="card-img-top" src="./↻ V-Time _ Events_files/157-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/15">POTTER's pizza party</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/16"><img class="card-img-top" src="./↻ V-Time _ Events_files/433-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/16">BURNS's run</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/17"><img class="card-img-top" src="./↻ V-Time _ Events_files/563-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/17">KENNEDY's awareness thing</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/18"><img class="card-img-top" src="./↻ V-Time _ Events_files/210-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/18">PETERSEN's bowling night</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/19"><img class="card-img-top" src="./↻ V-Time _ Events_files/902-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/19">MCCALL's code-a-thon</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/20"><img class="card-img-top" src="./↻ V-Time _ Events_files/948-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/20">BROWNING's pizza party</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/21"><img class="card-img-top" src="./↻ V-Time _ Events_files/201-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/21">CRANE's picknick</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/22"><img class="card-img-top" src="./↻ V-Time _ Events_files/1075-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/22">TAYLOR's picknick</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/23"><img class="card-img-top" src="./↻ V-Time _ Events_files/1082-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/23">MCCLAIN's code-a-thon</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/24"><img class="card-img-top" src="./↻ V-Time _ Events_files/190-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/24">TOWNSEND's run</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/25"><img class="card-img-top" src="./↻ V-Time _ Events_files/776-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/25">BYRD's soup kitchen</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/26"><img class="card-img-top" src="./↻ V-Time _ Events_files/441-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/26">HENSLEY's pizza party</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/27"><img class="card-img-top" src="./↻ V-Time _ Events_files/203-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/27">ARIAS's walk</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/28"><img class="card-img-top" src="./↻ V-Time _ Events_files/620-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/28">FOSTER's bowling night</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/29"><img class="card-img-top" src="./↻ V-Time _ Events_files/884-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/29">HALEY's awareness thing</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/30"><img class="card-img-top" src="./↻ V-Time _ Events_files/869-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/30">HOLT's bowling night</a></h5>
+                                <div class="card-text">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/31"><img class="card-img-top" src="./↻ V-Time _ Events_files/434-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/31">Dojo Dash</a></h5>
+                                <div class="card-text">
+                                    
+                                    <a href="http://localhost:8000/event/edit/menu/31">Edit me</a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <a href="http://localhost:8000/event/dashboard/32"><img class="card-img-top" src="./↻ V-Time _ Events_files/29-300x300.jpg" alt="Card image cap"></a>
+                                <hr>
+                                <h5 class="card-title text-capitalize" style="text-align: center;"><a href="http://localhost:8000/event/dashboard/32">Dojo DDR</a></h5>
+                                <div class="card-text">
+                                    
+                                    <a href="http://localhost:8000/event/edit/menu/32">Edit me</a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- create event modal -->
+        <div class="modal fade" id="create-event" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <!-- <div class="card" style="width: 60rem; height: 40rem;"></div> -->
+                <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                    <h4 class="modal-title">Steve Jobs's Performance Stats</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="http://localhost:8000/event/register" method="POST">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="UefTMOFgNH6LJLdzx95AwFtXm2sKa2qI4kIqFcP6ob3KNm8nSZYs3UKnYJbC8BM6">
+                        
+                        <div class="form-group">
+                            <label for="owner">Event Owner</label>
+                            <select name="owner" class="form-control">
+                                
+                                <option value="12">Key Technology, Inc.</option>
+                                
+                                <option value="41">Apple Inc.</option>
+                                
+                                <option value="42">CodingDojo</option>
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Event Name</label>
+                            <input type="text" class="form-control" name="name" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Event Associated Email</label>
+                            <input type="email" class="form-control" name="email" id="email" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone_number">Phone Number</label>
+                            <input type="text" class="form-control" name="phone_number" id="phone_number" value="9491234567">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Event Scheduled Time</label>
+                            <input type="date" class="form-control" name="time" value="2020-09-29" id="time">
+                        </div>
+                        <div class="form-group">
+                            <label for="website">Event Website</label>
+                            <input type="text" class="form-control" name="website" value="" id="website">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Event Location</label>
+                            <input type="text" class="form-control" name="address" value="" id="address">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Event About</label>
+                            <textarea type="date" class="form-control" name="description" value="" id="description"></textarea>
+                        </div>
+                    
+                        <div class="" id="job_selection">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Required Jobs</label>
+                            <select class="form-control" id="select_required_job">
+                                <option class="option" value="0" selected="">Select a Job Type</option>
+                                
+                                <option class="option" value="1">General Services</option>
+                                
+                                <option class="option" value="2">Program Manager</option>
+                                
+                                <option class="option" value="3">Program Supervisor</option>
+                                
+                                <option class="option" value="4">Program Coordinator</option>
+                                
+                                <option class="option" value="5">Executive Assistant</option>
+                                
+                                <option class="option" value="6">Community Relations Manager</option>
+                                
+                                <option class="option" value="7">Development Director</option>
+                                
+                                <option class="option" value="8">Sponsorship Coordinator</option>
+                                
+                                <option class="option" value="9">Communications Assistant</option>
+                                
+                                <option class="option" value="10">Development Specialist</option>
+                                
+                                <option class="option" value="11">Community Market Manager</option>
+                                
+                                <option class="option" value="12">Fund Development Coordinator</option>
+                                
+                                <option class="option" value="13">Donor Relations</option>
+                                
+                                <option class="option" value="14">Volunteer Coordinator</option>
+                                
+                                <option class="option" value="15">Volunteer Services Specialist</option>
+                                
+                                <option class="option" value="16">Event Coordinator</option>
+                                
+                                <option class="option" value="17">Campaign Coordinator</option>
+                                
+                                <option class="option" value="18">Catering Sales Manager</option>
+                                
+                                <option class="option" value="19">Cleaning Crew</option>
+                                
+                                <option class="option" value="20">Host</option>
+                                
+                                <option class="option" value="21">Convention and Catering Operations Manager</option>
+                                
+                                <option class="option" value="22">Catering Services Manager</option>
+                                
+                                <option class="option" value="23">Bartender</option>
+                                
+                                <option class="option" value="24">Banquet Servers</option>
+                                
+                                <option class="option" value="25">Catering Manager</option>
+                                
+                                <option class="option" value="26">Restaurant and Catering Operations Manager</option>
+                                
+                                <option class="option" value="27">Catering and Convention Services Manager</option>
+                                
+                                <option class="option" value="28">Social Catering Manager</option>
+                                
+                                <option class="option" value="29">Assistant Catering Director</option>
+                                
+                                <option class="option" value="30">Director of Special Events</option>
+                                
+                                <option class="option" value="31">Catering and Specials Events Manager</option>
+                                
+                                <option class="option" value="32">Event Manager</option>
+                                
+                                <option class="option" value="33">Site Development and Programming</option>
+                                
+                                <option class="option" value="34">Director of Event Services</option>
+                                
+                                <option class="option" value="35">Sponsorship Coordinator</option>
+                                
+                                <option class="option" value="36">General Services</option>
+                                
+                                <option class="option" value="37">Program Manager</option>
+                                
+                                <option class="option" value="38">Program Supervisor</option>
+                                
+                                <option class="option" value="39">Program Coordinator</option>
+                                
+                                <option class="option" value="40">Executive Assistant</option>
+                                
+                                <option class="option" value="41">Community Relations Manager</option>
+                                
+                                <option class="option" value="42">Development Director</option>
+                                
+                                <option class="option" value="43">Sponsorship Coordinator</option>
+                                
+                                <option class="option" value="44">Communications Assistant</option>
+                                
+                                <option class="option" value="45">Development Specialist</option>
+                                
+                                <option class="option" value="46">Community Market Manager</option>
+                                
+                                <option class="option" value="47">Fund Development Coordinator</option>
+                                
+                                <option class="option" value="48">Donor Relations</option>
+                                
+                                <option class="option" value="49">Volunteer Coordinator</option>
+                                
+                                <option class="option" value="50">Volunteer Services Specialist</option>
+                                
+                                <option class="option" value="51">Event Coordinator</option>
+                                
+                                <option class="option" value="52">Campaign Coordinator</option>
+                                
+                                <option class="option" value="53">Catering Sales Manager</option>
+                                
+                                <option class="option" value="54">Cleaning Crew</option>
+                                
+                                <option class="option" value="55">Host</option>
+                                
+                                <option class="option" value="56">Convention and Catering Operations Manager</option>
+                                
+                                <option class="option" value="57">Catering Services Manager</option>
+                                
+                                <option class="option" value="58">Bartender</option>
+                                
+                                <option class="option" value="59">Banquet Servers</option>
+                                
+                                <option class="option" value="60">Catering Manager</option>
+                                
+                                <option class="option" value="61">Restaurant and Catering Operations Manager</option>
+                                
+                                <option class="option" value="62">Catering and Convention Services Manager</option>
+                                
+                                <option class="option" value="63">Social Catering Manager</option>
+                                
+                                <option class="option" value="64">Assistant Catering Director</option>
+                                
+                                <option class="option" value="65">Director of Special Events</option>
+                                
+                                <option class="option" value="66">Catering and Specials Events Manager</option>
+                                
+                                <option class="option" value="67">Event Manager</option>
+                                
+                                <option class="option" value="68">Site Development and Programming</option>
+                                
+                                <option class="option" value="69">Director of Event Services</option>
+                                
+                                <option class="option" value="70">Sponsorship Coordinator</option>
+                                
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+    $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#events div").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+            var added_jobs={};
+            $('#select_required_job').change(function(){ //when user selects a different job
+                console.log('-------------------activating change function---------------')
+                var job_id = $(this).val();
+                var job_text = $("#select_required_job option:selected").text();
+                
+                
+                if (added_jobs[job_id]!==undefined){
+                    console.log("if check passed")
+                    console.log('job already added')
+                } else{
+                    console.log("begin else statement")
+                    added_jobs[job_id]=job_text
+                    console.log("added id "+job_id+" to dictionary "+added_jobs+", value: "+added_jobs[job_id]) // adding to added_jobs array
+                    console.log("selected job text: "+job_text);
+                    $('#job_selection').append(
+                        '<div class="input-group mb-3" id="close_'+job_id+'">'+
+                            '<div class="input-group-prepend">'+
+                                '<div class="input-group-text">'+
+                                    '<button type="button" class="close" super_id="close_'+job_id+'" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                                '</div>'+
+                            '</div>'+
+                            '<fieldset disabled><input type="text" class="form-control" name="jobType_'+job_id+'" placeholder="'+job_text+'" aria-label="job type" aria-describedby="job type"></fieldset>'+
+                            '<div class="input-group-append">'+
+                                '<input type="number" class="form-control" placeholder="0" name="amount_'+job_id+'" id="number" aria-describedby="">'+
+                            '</div>'+
+                        '</div>'
+                    );
+                    console.log("removing option: "+$(".option[value="+job_id+"]").val()+" from option selector")//removing option
+                    $(".option[value="+job_id+"]").remove()
+                }
+            })
+            $(document).on('click', '.close', function(){
+                console.log("||||||||||||||activating click function||||||||||||||||")
+                var job_id = $(this).attr("super_id").slice(6);
+                console.log("job id: "+job_id)
+                var job = added_jobs[job_id];
+                console.log(job)
+                current_id=$(this).attr('super_id');
+                console.log("removing: "+current_id);
+                $("#"+current_id).remove();
+                
+                console.log("new spliced array: "+added_jobs); //removing from added_jobs array
+                console.log("adding option:"+job+" to option selector"); // adding option
+                $("#select_required_job").append(
+                    `<option class= "option" value="${job_id}">${job}</option>`
+                )
+                delete added_jobs[job_id];
+            })
+            
+        })
+</script>
+
+        </div>
+        <div class="footer">
+            
+            <div class="card-footer text-center bg-dark">
+                <span class="text-center" style="color: #009ac7;">Copyright © 2020 A&amp;D. All rights reserved.</span>
+            </div>
+            
+        </div>
+    </div>
+    
+
+</body></html>

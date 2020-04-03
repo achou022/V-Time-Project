@@ -1,0 +1,58 @@
+        {% extends "base.html" %}
+        {% block title %}
+        &circlearrowright; V-Time | {{user.first_name}} {{user.last_name}} | Profile
+        {% endblock title %}
+        {% block body %}
+        <div class="justify-content-center">
+            <div class="card">
+                <!-- <div class="card-header">
+                    User# {{user.id}}
+                </div> -->
+                <div class="card-body">
+                    <div class="media">
+                        {%load static%}
+                        <img class="mr-3" src="{%static 'profilePic.png'%}" alt="dummy profile pic placeholder">
+                        <div class="media-body">
+                            <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+                            <p class="card-text">Description: {{user.description}} {%lorem%}</p>
+                            </div>
+                        </div>
+                    </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Email: {{user.email}}</li>
+                    <li class="list-group-item">Participating Events:
+                        {% if user.upcomingEvents %}
+                        <ul>
+                            {% for job in user.upcomingEvents %}
+                                <li><a href="{%url 'event:dashboard' event_id=job.event.id%}">{{job.event.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                            None yet
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">Past Events:
+                        {% if user.pastEvents %}
+                        <ul style="list-style:square;">
+                            {% for job in user.pastEvents %}
+                                <li><a href="{%url 'event:dashboard' event_id=job.event.id%}">{{job.event.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                            None yet
+                        {% endif %}
+                    </li>
+                    {%if user.user_post.all%}
+                    <li class="list-group-item">
+                        Posts:
+                        <ul style="list-style: none;">
+                            {%for post in user.user_post.all%}
+                            <li><a href="{%url 'event:dashboard' event_id=post.event.id%}">{{post.message}}</a></li>
+                            {%endfor%}
+                        </ul>
+                    </li>
+                    {%endif%}
+                </ul>
+            </div>
+        </div>
+        {% endblock %}
