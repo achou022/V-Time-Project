@@ -9,7 +9,7 @@ V-Time project is a platform developed by a two-developer team for Coding Dojo's
 * Plotly for Data Visualization
 * Bcrypt and Regex for backend User login and Registration validations
 ### ScreenShots ###
-* [Landing Page]
+* [Landing Page](https://github.com/achou022/V-Time-Project/blob/master/screenshots/Landing%20Page.png?raw=true)
 * [User Profile]
 * [Event Splash Page]
 * [Event Profile Page]
