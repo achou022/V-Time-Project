@@ -16,3 +16,5 @@ V-Time project is a platform developed by a two-developer team for Coding Dojo's
 * [Event Profile Page](https://github.com/achou022/V-Time-Project/blob/master/screenshots/%E2%86%BB%20V-Time%20%7C%20Event%20Functionality.pdf)
 * [Register Event](https://github.com/achou022/V-Time-Project/blob/master/screenshots/%E2%86%BB%20V-Time%20%7C%20Events%20Modal.pdf)
 * [Company Profile](https://github.com/achou022/V-Time-Project/blob/master/screenshots/%E2%86%BB%20V-Time%20%7C%20Company%20Profile.pdf)
+
+### Dependencies ###
