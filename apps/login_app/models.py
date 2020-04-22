@@ -65,11 +65,11 @@ class UserManager(models.Manager):
             self.errors['last_name']="edit: must have more than 2 characters in last name"
         if self.email_validator(postData):
             self.errors['email']= "edit: Invalid email address!"
-        allUsers = User.objects.all()
-        for user in allUsers:
-            if user.id != my_id:
-                if postData['email']==user.email:
-                    self.errors['emailUnique']="Email is already in use"
+        # allUsers = User.objects.all()
+        # for user in allUsers:
+        #     if user.id != my_id:
+        #         if postData['email']==user.email:
+        #             self.errors['emailUnique']="Email is already in use"
         return self.errors
 #-----------------------Models-------------------------#
 class User(models.Model):

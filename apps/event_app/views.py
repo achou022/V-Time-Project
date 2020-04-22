@@ -74,7 +74,6 @@ def edit(request, event_id):
         # need a way to delete jobs
         create_jobs(request, event_id)
         event.save()
-        
         return redirect(f'/event/dashboard/{event_id}')
     else:
         return redirect(f'/event/edit/menu/{event_id}')
