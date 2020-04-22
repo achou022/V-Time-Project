@@ -21,4 +21,4 @@ V-Time project is a platform developed by a two-developer team for Coding Dojo's
 * Python 2.7
 * Django 2.2
 * pip install bcrypt
-* /volunteer_repo terminal-cmd: python manage.py runserver
+* volunteer_repo terminal-cmd: python manage.py runserver
