@@ -20,7 +20,6 @@ V-Time project is a platform developed by a two-developer team for Coding Dojo's
 ### Dependencies ###
 * Python 2.7
 * Django 2.2
-<<<<<<< HEAD
 #### Install Dependencies ####
 * pip install -r requirements.txt
 #### Run Project ####
