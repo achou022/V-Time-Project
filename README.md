@@ -1,6 +1,5 @@
-## About V-TIME Project ##
+## About [V-TIME](https://vtime-277202.wl.r.appspot.com/) Project ##
 V-Time project is a platform developed by a two-developer team for Coding Dojo's project week hackathon. It allows users to volunteer for events posted by companies on the platform and tracks the volunteer hours contributed by the user. 
-[Site](https://vtime-277202.wl.r.appspot.com/)
 ### Technologies Used ###
 * Python
 * Django Framework
